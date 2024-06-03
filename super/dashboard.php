@@ -1,5 +1,5 @@
 <?php
-include 'includes/config.php'; // Ensure this file includes the $conn database connection
+include '../includes/config.php'; // Ensure this file includes the $conn database connection
 
 // Fetch total cow count
 $totalCowsQuery = "SELECT COUNT(*) as total_cows FROM cows";
@@ -225,7 +225,7 @@ $totalYields = $milkData['total_yields'] ?? 0;
             </thead>
             <tbody>
             <?php
-                include("includes/config.php");
+                include("../includes/config.php");
 
                 $currentDate = date('Y-m-d');
 

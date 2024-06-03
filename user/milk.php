@@ -183,7 +183,7 @@
         </div>
         <div class="button-container">
             <!-- Set onclick attribute to redirect to add_milk.php -->
-            <button onclick="location.href='../users/add_milk.php'">+ New Record</button>
+            <button onclick="location.href='../user/add_milk.php'">+ New Record</button>
         </div>
         <div class="table-container">
             <table>

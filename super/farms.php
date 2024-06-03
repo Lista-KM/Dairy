@@ -37,7 +37,7 @@
                 <tbody class="bg-white divide-y divide-gray-200">
                     <?php
                     // Include database connection
-                    include 'includes/config.php';
+                    include '../includes/config.php';
 
                     // Retrieve farm data from the database
                     $sql = "SELECT * FROM farms";
@@ -51,7 +51,7 @@
                             echo "<td class='px-6 py-4 whitespace-nowrap'>" . $row['location'] . "</td>";
                             echo "<td class='px-6 py-4 whitespace-nowrap'>" . $row['size'] . "</td>";
                             echo "<td class='px-6 py-4 whitespace-nowrap'>
-                                    <button class='bg-yellow-500 text-white px-4 py-2 rounded-lg' onclick=\"window.location.href='farm_dashboard.php?id=" . $row['id'] . "'\">View Details</button> 
+                                    <button class='bg-yellow-500 text-white px-4 py-2 rounded-lg' onclick=\"window.location.href='user/farm_dashboard.php?id=" . $row['id'] . "'\">View Details</button> 
                                   </td>";
                             echo "</tr>";
                         }

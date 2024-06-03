@@ -1,5 +1,5 @@
 <?php
-require_once('includes/config.php'); 
+include('../includes/config.php'); 
 
 // Handle Add Cow (POST Request)
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

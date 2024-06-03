@@ -1,75 +1,47 @@
 <?php
 session_start();
 error_reporting(0);
-include "includes/config.php";
-// Code user Registration
+include "../includes/config.php";
+
 // Code for User login
-if(isset($_POST['login']))
-{
-   $username=$_POST['username'];
-   $password=md5($_POST['password']);
-$query=mysqli_query($conn,"SELECT * FROM users WHERE username='$username' and password='$password'");
-$num=mysqli_fetch_array($query);
+if (isset($_POST['login'])) {
+    $username = $_POST['username'];
+    $password = md5($_POST['password']);
 
+    $query = mysqli_query($conn, "SELECT * FROM users WHERE username='$username' AND password='$password'");
+    $num = mysqli_fetch_array($query);
 
-$_SESSION['role']=$num['role'];
-$_SESSION['username']=$num['username'];
-if($num>0)
-{
-    
-$_SESSION['login']=$_POST['username'];
-$_SESSION['id']=$num['id'];
-$_SESSION['name']=$num['name'];
+    if ($num > 0) {
+        $_SESSION['role'] = $num['role'];
+        $_SESSION['username'] = $num['username'];
+        $_SESSION['user_id'] = $num['id'];
+        $_SESSION['farm_id'] = $num['farm'];
 
-$uip=$_SERVER['REMOTE_ADDR'];
+        $uip = $_SERVER['REMOTE_ADDR'];
+        $status = 1;
+        $log = mysqli_query($conn, "INSERT INTO userlog (username, userip, status) VALUES ('" . $_SESSION['username'] . "', '$uip', '$status')");
 
-$status=1;
-$log=mysqli_query($conn,"insert into userlog(username,userip,status) values('".$_SESSION['login']."','$uip','$status')");
-
-// statement to control files accessability with different users
-if($_SESSION['role'] == "superadmin")
-{
-    header("location:super/");
-
+        // Redirect based on user role
+        if ($_SESSION['role'] == "Superadmin") {
+            header("Location: super/");
+        } elseif ($_SESSION['role'] == "admin") {
+            header("Location: admin/");
+        } elseif ($_SESSION['role'] == "user") {
+            header("Location: user/");
+        } else {
+            header("Location: 404.html");
+        }
+        exit();
+    } else {
+        $username = $_POST['username'];
+        $uip = $_SERVER['REMOTE_ADDR'];
+        $status = 0;
+        $log = mysqli_query($conn, "INSERT INTO userlog (userEmail, userip, status) VALUES ('$username', '$uip', '$status')");
+        $_SESSION['errmsg'] = "Invalid username or Password";
+        header("Location: login.php");
+        exit();
+    }
 }
-else
-if($_SESSION['role'] == "admin")
-{
-    
-    header("location:admin/");
- 
-}
-else
-if($_SESSION['role'] == "user")
-{
-    header("location:user/");
- 
-}
-else{
-
-    header("location:404.html");
-}
-
-
-
-exit();
-}
-else
-{
-$extra="";
-$username=$_POST['username'];
-$uip=$_SERVER['REMOTE_ADDR'];
-$status=0;
-$log=mysqli_query($conn,"insert into userlog(userEmail,userip,status) values('$username','$uip','$status')");
-$host  = $_SERVER['HTTP_HOST'];
-$uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-header("location:http://$host$uri/$extra");
-$_SESSION['errmsg']="Invalid username id or Password";
-exit();
-}
-}
-
-
 ?>
 
 

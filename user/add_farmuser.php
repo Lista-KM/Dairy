@@ -129,7 +129,8 @@ $farms = mysqli_fetch_all($farm_result, MYSQLI_ASSOC);
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required><br><br>
             <label for="farm_id">Farm:</label>
-            <select id="farm_id" name="farm_id" required>
+            <select id="farm_id" name="farm_id" >
+                <option value="">None</option> <!-- Option for None -->
                 <?php foreach ($farms as $farm) : ?>
                     <option value="<?php echo $farm['id']; ?>"><?php echo $farm['name']; ?></option>
                 <?php endforeach; ?>

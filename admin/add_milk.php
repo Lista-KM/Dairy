@@ -1,6 +1,6 @@
 <?php
 // Include your database connection file
-include 'includes/config.php';
+include '../includes/config.php';
 $conn = new mysqli("localhost", "root", "", "dfsms");
 
 // Check connection
