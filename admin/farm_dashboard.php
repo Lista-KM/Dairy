@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'includes/config.php';
+include '../includes/config.php';
 
 // Assume user_id is stored in the session
 $user_id = $_SESSION['user_id'];
@@ -123,7 +123,7 @@ if ($userData) {
 
     <!-- Main content goes here -->
     <?php
-    include 'includes/config.php';  
+    include '../includes/config.php';  
 
     // Fetch cow count
     $totalCowsQuery = "SELECT COUNT(*) as total_cows FROM cows";
@@ -356,7 +356,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </thead>
                     <tbody>
                     <?php
-                include("includes/config.php");
+                include("../includes/config.php");
 
                 $currentDate = date('Y-m-d');
 

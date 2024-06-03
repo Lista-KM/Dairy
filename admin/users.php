@@ -1,5 +1,5 @@
 <?php
-include 'includes/config.php';
+include '../includes/config.php';
 
 // Fetch total user count
 $totalUsersQuery = "SELECT COUNT(*) as total_users FROM users";
@@ -89,12 +89,15 @@ echo json_encode(['total_users' => $totalUsersData['total_users']]);
             <th>ID</th>
             <th>Username</th>
             <th>Farm</th>
+            <th>Role</th>
+            <th>Farm</th>
+            <th>Status</th>
         </tr>
     </thead>
     <tbody>
         <?php
         // Include database connection
-        include 'includes/config.php';
+        include '../includes/config.php';
 
         // Retrieve user data from the database
         $sql = "SELECT id, username, farm FROM users";
